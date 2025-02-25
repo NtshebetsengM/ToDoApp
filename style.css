@@ -1,0 +1,44 @@
+:root{
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(211, 184, 212);
+    display: flex;
+    justify-self: center;
+    margin: 30px;
+    overflow: hidden;
+}
+
+.postItBoard{
+    background-image: url(images/E104OOFU.jpg);
+    background-repeat: no-repeat;
+    background-position:center ;
+    background-size: cover;
+    display: flex;
+    gap: 20px;
+    border: 10px solid rgb(202, 127, 166);
+    width: 90vw;
+    height: 90vh;
+    margin: 0;
+    padding: 0 auto;
+}
+
+.postItNote{
+    display: block;
+    background-color: pink;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    height: 200px;
+}
+.postItNote h2{
+    text-align: center;
+}
+
+.postItNote h3{
+    text-align: center;
+}
+
+.postItPin{
+    text-align: center;
+}
