@@ -15,30 +15,32 @@
        
     <main id="post-it-board">
             
-        
+        <!--
         <div class="postItNote">
-                <div class="postItPin">x</div>
-                <ul id="task-list">
-                    <li id="task">task 1</li>
-                    <li>task 2</li>
-                </ul>
-                <h3 id="delete-task">delete</h3>
-            </div>  
+            <div class="postItPin">x</div>
+            <ul id="task-list">
+                <li id="task">task 1</li>
+                <li>task 2</li>
+            </ul>
+            <h3 id="delete-task">delete</h3>
+        </div>  
+            
+        -->
+        
           
              
             
     </main>
 <!--Input new task-->
 <div id="new-task-modal">
-    <h2>new tasks for you?</h2>
-    <form action="">
-        
-        <input type="text" name="title" id="list-item" placeholder="task title" required>
-        
-        <textarea name="description" id="list-item-desc" placeholder="task description"></textarea>
-        
+    <h2>what are we tackling today?</h2>
+    <form action="" id="new-task-form">
+        <div id="input-container">
+            <input type="text" name="title" id="task-name" placeholder="task name" required>
+        </div>
+        <button id="add-more-btn" class="addMoreBtn">add more</button>
         <div class="formBtns">
-            <button type="submit" id="add-task">add task</button>
+            <button type="submit" id="add-task">add tasks</button>
             <button id="cancel-btn"> cancel add</button>
         </div>
     </form>
