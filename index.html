@@ -8,37 +8,42 @@
     <title>Document</title>
 </head>
 <body>
-    <!--first task-->
-    <main class="postItBoard">
-            <div class="postItNote">
+    <header> 
+        <h1>what to do today</h1>
+        <button id="new-task-btn">add new </button>
+    </header>
+       
+    <main id="post-it-board">
+            
+        
+        <div class="postItNote">
                 <div class="postItPin">x</div>
-                <h2>todo 1 </h2>
-                <ul>
-                    <li>task 1</li>
+                <ul id="task-list">
+                    <li id="task">task 1</li>
                     <li>task 2</li>
                 </ul>
-                <h3>delete</h3>
-            </div>
-            <!--second task-->
-            <div class="postItNote">
-                <div class="postItPin">x</div>
-                <h2>todo 2 </h2>
-                <ul>
-                    <li>task 1</li>
-                    <li>task 2</li>
-                </ul>
-                <h3>delete</h3>
-            </div>
-            <!--third task-->
-            <div class="postItNote">
-                <div class="postItPin">x</div>
-                <h2>todo 3 </h2>
-                <ul>
-                    <li>task 1</li>
-                    <li>task 2</li>
-                </ul>
-                <h3>delete</h3>
-            </div>
+                <h3 id="delete-task">delete</h3>
+            </div>  
+          
+             
+            
     </main>
+<!--Input new task-->
+<div id="new-task-modal">
+    <h2>new tasks for you?</h2>
+    <form action="">
+        
+        <input type="text" name="title" id="list-item" placeholder="task title" required>
+        
+        <textarea name="description" id="list-item-desc" placeholder="task description"></textarea>
+        
+        <div class="formBtns">
+            <button type="submit" id="add-task">add task</button>
+            <button id="cancel-btn"> cancel add</button>
+        </div>
+    </form>
+    
+</div>
+   
 </body>
 </html>
