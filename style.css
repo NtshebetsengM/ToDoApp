@@ -65,7 +65,7 @@ h1{
 
 #new-task-modal{
     background-color: rgb(168, 110, 168);
-    display: block;
+    display: none;
     max-width: 50%;
     z-index: 1000;
     position:fixed;
@@ -128,4 +128,8 @@ button:hover{
     display: flex;
     margin: 10px;
     gap: 10px;
+  }
+
+  .postItList{
+    list-style: none;
   }

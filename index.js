@@ -14,75 +14,91 @@ cancelBtn.addEventListener("click", ()=> newTaskModal.style.display ="none")
 
 addMoreBtn.addEventListener('click', (event)=>{
     event.preventDefault()
-    const newInput = `
-      <input type="text" name="title" id="task-name" placeholder="task" required>
-    `
-    inputCont.insertAdjacentHTML('afterend', newInput)
+    const newInput = document.createElement('input');
+    newInput.type = 'text';
+    newInput.name = 'task_name';
+    newInput.placeholder = 'Task name';
+    newInput.required = true;
+
+    // Append to the container
+    inputCont.appendChild(newInput);
 }
 )
 
-document.addEventListener('DOMContentLoaded', function() {
-    if (!localStorage.getItem('tasks')) {
-        localStorage.setItem('tasks', JSON.stringify([]))
-        console.log('Initialized tasks in localStorage')
-      } else {
-        console.log('Data already exists in localStorage')
-      }
-      
-  });
-  
+
 
 /**add new task to localstorage */
 newTaskForm.addEventListener('submit', (event) => {
     event.preventDefault()
 
-
-    const taskNames = newTaskForm.querySelectorAll('input[name= "title"]')
+    const groupTitle = document.getElementById('group-title').value
+    const taskNames = document.querySelectorAll('input[name="task_name"]')
+    const taskValues = Array.from(taskNames).map(input=>input.value)
 
     const newSubmission ={
         submissionId: Date.now(),
-        tasks: []
+        group: groupTitle,
+        tasks: taskValues
     }
 
-    taskNames.forEach((input, index)=> {
-        newSubmission.tasks.push({
-            taskId: Date.now() + index,
-            name: input.value,
-        })
-    })
+    console.log(newSubmission)
+  
     
-    const existingSubmissions = JSON.parse(localStorage.getItem('taskSubmissions')) || []
+    let existingSubmissions = JSON.parse(localStorage.getItem('taskSubmissions')) || []
     
-    existingSubmissions.push(newSubmission)
+    existingSubmissions.unshift(newSubmission)
    
     localStorage.setItem('taskSubmissions', JSON.stringify(existingSubmissions))
   
-    addSubmissionToUI(newSubmission)
+    renderSubmission(newSubmission)
     
     newTaskModal.style.display ="none"
 
 })
 
+
 /**add new task to UI */
 
-function addSubmissionToUI(submission) {
+function renderSubmission(submission) {
     const submissionContainer = document.createElement('div');
     submissionContainer.classList.add('postItNote');
-    submissionContainer.id = `submission-${submission.submissionId}`;
+    submissionContainer.id = submission.submissionId;
+
+
+    const taskListHTML = submission.tasks
+    .map((task, index) => `
+        <li id="task-${submission.submissionId}-${index}" class="postItList">
+            ${task}
+            <button onclick="deleteTask(${submission.submissionId}, ${index})">Delete</button>
+        </li>
+    `)
+    .join("")
 
     // Create submission header
-    const submissionHTML =
-  submission.tasks.forEach(task => {
+    const submissionHTML = `
+         <h2>${submission.group}</h2> 
+        <ul>${taskListHTML}</ul>
         `
-            <div class="task" id="task-${task.taskId}">
-                <h2>${task.name}</h2>
-                <h3 onclick="deleteTask(${submission.submissionId}, ${task.taskId})">Delete</h3>
-            </div>
-        `;
-    });
 
     submissionContainer.innerHTML = submissionHTML;
 
     // Append to post-it board
-    postItBoard.appendChild(submissionContainer);
+    postItBoard.insertBefore(submissionContainer, postItBoard.firstChild);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Check if there's already data in localStorage
+    let storedSubmissions = localStorage.getItem('taskSubmissions');
+    
+    if (!storedSubmissions) {
+        localStorage.setItem('taskSubmissions', JSON.stringify([]));
+        console.log('Initialized tasks in localStorage');
+    } else {
+        console.log('Rendering stored submissions...');
+        const submissions = JSON.parse(storedSubmissions); // Convert JSON to array
+        
+        // Render each submission
+        submissions.reverse().forEach(renderSubmission);
+    }
+});
+
