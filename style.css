@@ -1,28 +1,50 @@
 :root{
     box-sizing: border-box;
 }
+
+/* <weight>: Use a value from 400 to 700
+<uniquifier>: Use a unique and descriptive class name
+
+.caveat- {
+  font-family: "Caveat", cursive;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+*/
 body{
     background-color: rgb(211, 184, 212);
     margin:0;
     padding: 0;
+    font-family: "Caveat", cursive;
 }
 header{
   display: grid;
   grid-template-columns: 1fr auto 1fr;
+  margin: 30px;
 }
 h1{
     text-align: center;
     grid-column: 2;
-    font-size: 40px;
+    font-size: 100px;
+    font-weight: 700;
+    color: rgb(242, 242, 242);
+    background-color:rgb(202, 127, 166);
+    padding: 20px;
+    margin: 10px;
+    text-shadow: 2px 1px 1px black;
 }
 
 #new-task-btn{
     border:none;
     padding: 10px;
     justify-self: end;
-    margin: 20px 50px;
-    width: 40%;
-    height: 70%;
+    margin: 0;
+    width: 50%;
+    height: 40%;
+    position: relative;
+    top: 110px;
+    right: 20px;
 }
 
 #post-it-board{
@@ -52,17 +74,32 @@ h1{
     border: 1px solid rgba(0,0,0,1);
     border-radius: 10px;
     box-shadow: 3px 3px 1px 1px rgb(49, 49, 52), 3px 3px 1px 2px rgba(0,0,0,1);
-    font-size: 15px;
-   
-    
+    font-size: 22px;
 }
 
 .postItNote h2{
     text-align: center;
+   
 }
 
 .postItPin{
     text-align: center;
+}
+ul{
+    list-style-type: circle;
+    padding: 20px;
+    margin: 0;
+}
+
+li{
+    transition: all 200ms linear;
+    width: auto;
+}
+li:hover{
+    text-decoration: line-through;
+    cursor:crosshair;
+    font-size: 24px;
+    font-weight: 700;
 }
 
 
@@ -74,8 +111,9 @@ h1{
     padding: 0;
     margin: 0;
     position: relative;
-    top: -30px;
-    left: 100px;
+    top: -25px;
+    right: -270px;
+    cursor: pointer;
 }
 
 .deleteTaskBtn:hover{
@@ -135,14 +173,14 @@ button{
     box-shadow: 3px 3px 1px 1px rgb(49, 49, 52), 3px 3px 1px 2px rgba(0,0,0,1);
   }
 button:hover{
-    background: rgba(0,0,0,1);
+    background: rgb(191, 129, 216);
     color: white;
     border: 1px solid rgba(0,0,0,1);
   }
 
   .addMoreBtn{
     padding:10px;
-    background-color: rgba(0, 0, 0, 0.194);
+    background-color: rgba(0, 0, 0, 0.176);
     font-size: 10px;
 }
   
@@ -152,10 +190,4 @@ button:hover{
     gap: 10px;
   }
 
-  .postItList{
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 0;
-  }
+ 
