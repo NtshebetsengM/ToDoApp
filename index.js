@@ -107,10 +107,55 @@ function renderSubmission(submission) {
 
     submissionContainer.innerHTML = submissionHTML;
 
-    // Append to post-it board
+  
     postItBoard.insertBefore(submissionContainer, postItBoard.firstChild);
     
 }
+
+// eslint-disable-next-line no-unused-vars
+function deleteTask(id, index) {
+    const userConfirmed = window.confirm("Are you sure you want to delete this task?");
+    
+    if (userConfirmed) {
+        console.log("task", id, index);
+
+        let storedSubmissions = localStorage.getItem('taskSubmissions');
+        
+        if (!storedSubmissions) {
+            console.log("No submissions found in localStorage.");
+            return;
+        }
+
+        const submissions = JSON.parse(storedSubmissions);
+        
+     
+        const targetSubmission = submissions.find(submission => submission.submissionId === id);
+        
+        if (targetSubmission) {
+      
+            targetSubmission.tasks.splice(index, 1);
+
+            localStorage.setItem('taskSubmissions', JSON.stringify(submissions));
+
+            const taskElement = document.getElementById(`task-${id}-${index}`);
+            const removeBtnElement = document.querySelector(`#task-${id}-${index} + .removeTaskBtn`);
+            
+            if (taskElement && removeBtnElement) {
+                taskElement.remove(); 
+                removeBtnElement.remove(); 
+            }
+
+            console.log(targetSubmission.tasks, "remaining tasks");
+
+           
+        } else {
+            console.log("Submission not found with id:", id);
+        }
+    } else {
+        console.log("Task deletion cancelled");
+    }
+}
+
 
 // eslint-disable-next-line no-unused-vars
 function deletePostIt(id){
