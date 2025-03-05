@@ -189,10 +189,11 @@ li {
 	grid-column: 1fr;
 }
 li:hover {
-	text-decoration: line-through;
+	
 	cursor: pointer;
 	font-weight: 700;
 }
+
 
 #new-task-modal {
 	background-color: rgb(168, 110, 168);

@@ -24,7 +24,7 @@ addMoreBtn.addEventListener('click', (event)=>{
     newInput.placeholder = 'Task name';
     newInput.required = true;
 
-    // Append to the container
+   
     inputCont.appendChild(newInput);
 }
 )
@@ -79,7 +79,7 @@ function renderSubmission(submission) {
 
     const taskListHTML = submission.tasks
     .map((task, index) => `
-        <li id="task-${submission.submissionId}-${index}" >
+        <li id="task-${submission.submissionId}-${index}" onclick="markTaskCompleted(${submission.submissionId}, ${index})" >
             ${task}
         </li>
         <div onclick="deleteTask(${submission.submissionId}, ${index})" class="removeTaskBtn">
@@ -111,6 +111,20 @@ function renderSubmission(submission) {
     postItBoard.insertBefore(submissionContainer, postItBoard.firstChild);
     
 }
+
+// eslint-disable-next-line no-unused-vars
+function markTaskCompleted(submissionId, index) {
+    
+    const taskElement = document.getElementById(`task-${submissionId}-${index}`);
+    
+    if (taskElement) {
+      
+        taskElement.style.textDecoration = 'line-through';
+    } else {
+        console.log('Task element not found!');
+    }
+}
+
 
 // eslint-disable-next-line no-unused-vars
 function deleteTask(id, index) {
@@ -163,17 +177,17 @@ function deletePostIt(id){
     const userConfirmed = window.confirm("Are you sure you want to delete this?");
     
     if(userConfirmed)
-    // Retrieve stored data from localStorage
+   
     {
         let storedSubmissions = localStorage.getItem('taskSubmissions');
 
-        // Check if the data exists
+        
         if (!storedSubmissions) {
             console.log("No submissions found in localStorage.");
             return;
         }
 
-        // Parse the stored data
+      
         const submissions = JSON.parse(storedSubmissions);
         
 
@@ -199,7 +213,7 @@ function deletePostIt(id){
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Check if there's already data in localStorage
+  
     let storedSubmissions = localStorage.getItem('taskSubmissions');
     
     if (!storedSubmissions) {
@@ -207,9 +221,9 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('Initialized tasks in localStorage');
     } else {
         console.log('Rendering stored submissions...');
-        const submissions = JSON.parse(storedSubmissions); // Convert JSON to array
+        const submissions = JSON.parse(storedSubmissions);
         
-        // Render each submission
+      
         submissions.reverse().forEach(renderSubmission);
     }
 });
