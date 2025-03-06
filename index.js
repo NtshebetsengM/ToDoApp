@@ -12,13 +12,21 @@ const inputCont = document.getElementById('input-container')
 newTaskBtn.addEventListener("click", ()=> newTaskModal.style.display ="block")
 cancelBtn.addEventListener("click", ()=> {
     
-    newTaskModal.style.display ="none"
     newTaskForm.reset()
+    newTaskModal.style.display ="none"
+    
+
+    const extraInputs = inputCont.querySelectorAll('input[name="task_name"]');
+    extraInputs.forEach((input, index) => {
+        if (index > 0) input.remove(); // Keep only the initial two inputs
+    })
 })
 
 addMoreBtn.addEventListener('click', (event)=>{
     event.preventDefault()
+
     const newInput = document.createElement('input');
+    
     newInput.type = 'text';
     newInput.name = 'task_name';
     newInput.placeholder = 'Task name';
@@ -37,7 +45,11 @@ newTaskForm.addEventListener('submit', (event) => {
    
     const groupTitle = document.getElementById('group-title').value
     const taskNames = document.querySelectorAll('input[name="task_name"]')
-    const taskValues = Array.from(taskNames).map(input=>input.value)
+    const taskValues = Array.from(taskNames).map(input=>({
+        name: input.value,
+        status:'pending',
+        })
+    )
 
     if(groupTitle.trim() === "" || taskValues.length === 0){
         console.log('nothing here')
@@ -61,10 +73,15 @@ newTaskForm.addEventListener('submit', (event) => {
         renderSubmission(newSubmission)
         
         newTaskModal.style.display ="none"
+     
 
     }
 
-    
+    newTaskForm.reset()
+    const extraInputs = inputCont.querySelectorAll('input[name="task_name"]');
+    extraInputs.forEach((input, index) => {
+        if (index > 0) input.remove(); // Keep only the initial two inputs
+    })
 
 })
 
@@ -76,20 +93,21 @@ function renderSubmission(submission) {
     submissionContainer.classList.add('postItNote');
     submissionContainer.id = submission.submissionId;
 
-
     const taskListHTML = submission.tasks
-    .map((task, index) => `
-        <li id="task-${submission.submissionId}-${index}" onclick="markTaskCompleted(${submission.submissionId}, ${index})" >
-            ${task}
-        </li>
-        <div onclick="deleteTask(${submission.submissionId}, ${index})" class="removeTaskBtn">
-        <svg  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.9995 13L10.9995 6.00004M20.9995 21H7.99955M10.9368 20.0628L19.6054 11.3941C20.7935 10.2061 21.3875 9.61207 21.6101 8.92709C21.8058 8.32456 21.8058 7.67551 21.6101 7.07298C21.3875 6.388 20.7935 5.79397 19.6054 4.60592L19.3937 4.39415C18.2056 3.2061 17.6116 2.61207 16.9266 2.38951C16.3241 2.19373 15.675 2.19373 15.0725 2.38951C14.3875 2.61207 13.7935 3.2061 12.6054 4.39415L4.39366 12.6059C3.20561 13.794 2.61158 14.388 2.38902 15.073C2.19324 15.6755 2.19324 16.3246 2.38902 16.9271C2.61158 17.6121 3.20561 18.2061 4.39366 19.3941L5.06229 20.0628C5.40819 20.4087 5.58114 20.5816 5.78298 20.7053C5.96192 20.815 6.15701 20.8958 6.36108 20.9448C6.59126 21 6.83585 21 7.32503 21H8.67406C9.16324 21 9.40784 21 9.63801 20.9448C9.84208 20.8958 10.0372 20.815 10.2161 20.7053C10.418 20.5816 10.5909 20.4087 10.9368 20.0628Z"
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
- </svg>
-        </div>
-    `)
-    .join("")
+        .map((task, index) => `
+            <li id="task-${submission.submissionId}-${index}" 
+                class="${task.status === 'completed' ? 'completedTask' : ''}" 
+                onclick="markTaskCompleted(${submission.submissionId}, ${index})">
+                ${task.name} 
+            </li>
+            <div onclick="deleteTask(${submission.submissionId}, ${index})" class="removeTaskBtn">
+                <svg  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.9995 13L10.9995 6.00004M20.9995 21H7.99955M10.9368 20.0628L19.6054 11.3941C20.7935 10.2061 21.3875 9.61207 21.6101 8.92709C21.8058 8.32456 21.8058 7.67551 21.6101 7.07298C21.3875 6.388 20.7935 5.79397 19.6054 4.60592L19.3937 4.39415C18.2056 3.2061 17.6116 2.61207 16.9266 2.38951C16.3241 2.19373 15.675 2.19373 15.0725 2.38951C14.3875 2.61207 13.7935 3.2061 12.6054 4.39415L4.39366 12.6059C3.20561 13.794 2.61158 14.388 2.38902 15.073C2.19324 15.6755 2.19324 16.3246 2.38902 16.9271C2.61158 17.6121 3.20561 18.2061 4.39366 19.3941L5.06229 20.0628C5.40819 20.4087 5.58114 20.5816 5.78298 20.7053C5.96192 20.815 6.15701 20.8958 6.36108 20.9448C6.59126 21 6.83585 21 7.32503 21H8.67406C9.16324 21 9.40784 21 9.63801 20.9448C9.84208 20.8958 10.0372 20.815 10.2161 20.7053C10.418 20.5816 10.5909 20.4087 10.9368 20.0628Z"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        `)
+        .join("");
 
     // Create submission header
     const submissionHTML = `
@@ -103,25 +121,37 @@ function renderSubmission(submission) {
         </div>
         <h2>${submission.group}</h2> 
         <ul>${taskListHTML}</ul>
-        `
+    `;
 
     submissionContainer.innerHTML = submissionHTML;
-
-  
     postItBoard.insertBefore(submissionContainer, postItBoard.firstChild);
-    
 }
 
 // eslint-disable-next-line no-unused-vars
 function markTaskCompleted(submissionId, index) {
-    
-    const taskElement = document.getElementById(`task-${submissionId}-${index}`);
-    
-    if (taskElement) {
-      
-        taskElement.style.textDecoration = 'line-through';
+    let storedSubmissions = JSON.parse(localStorage.getItem('taskSubmissions'));
+
+    if (!storedSubmissions) {
+        console.log("No submissions found in localStorage.");
+        return;
+    }
+
+    const submission = storedSubmissions.find(sub => sub.submissionId === submissionId);
+    if (submission) {
+        const task = submission.tasks[index];
+        task.status = task.status === "completed" ? "pending" : "completed";
+
+        // Update localStorage
+        localStorage.setItem('taskSubmissions', JSON.stringify(storedSubmissions));
+
+        // Update UI
+        const taskElement = document.getElementById(`task-${submissionId}-${index}`);
+        
+        if (taskElement) {
+            taskElement.classList.toggle("completedTask");
+        }
     } else {
-        console.log('Task element not found!');
+        console.log("Submission not found with id:", submissionId);
     }
 }
 
@@ -131,44 +161,21 @@ function deleteTask(id, index) {
     const userConfirmed = window.confirm("Are you sure you want to delete this task?");
     
     if (userConfirmed) {
-        console.log("task", id, index);
+        let storedSubmissions = JSON.parse(localStorage.getItem('taskSubmissions')) || [];
 
-        let storedSubmissions = localStorage.getItem('taskSubmissions');
-        
-        if (!storedSubmissions) {
-            console.log("No submissions found in localStorage.");
-            return;
-        }
-
-        const submissions = JSON.parse(storedSubmissions);
-        
-     
-        const targetSubmission = submissions.find(submission => submission.submissionId === id);
+        const targetSubmission = storedSubmissions.find(submission => submission.submissionId === id);
         
         if (targetSubmission) {
-      
             targetSubmission.tasks.splice(index, 1);
+            localStorage.setItem('taskSubmissions', JSON.stringify(storedSubmissions));
 
-            localStorage.setItem('taskSubmissions', JSON.stringify(submissions));
-
-            const taskElement = document.getElementById(`task-${id}-${index}`);
-            const removeBtnElement = document.querySelector(`#task-${id}-${index} + .removeTaskBtn`);
-            
-            if (taskElement && removeBtnElement) {
-                taskElement.remove(); 
-                removeBtnElement.remove(); 
-            }
-
-            console.log(targetSubmission.tasks, "remaining tasks");
-
-           
-        } else {
-            console.log("Submission not found with id:", id);
+            // Remove from UI
+            document.getElementById(`task-${id}-${index}`)?.remove();
+            document.querySelector(`[onclick="deleteTask(${id}, ${index})"]`)?.remove();
         }
-    } else {
-        console.log("Task deletion cancelled");
     }
 }
+
 
 
 // eslint-disable-next-line no-unused-vars

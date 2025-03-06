@@ -194,6 +194,9 @@ li:hover {
 	font-weight: 700;
 }
 
+.completedTask{
+	text-decoration: line-through;
+}
 
 #new-task-modal {
 	background-color: rgb(168, 110, 168);
