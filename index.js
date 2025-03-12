@@ -30,7 +30,7 @@ addMoreBtn.addEventListener('click', (event)=>{
     newInput.type = 'text';
     newInput.name = 'task_name';
     newInput.placeholder = 'Task name';
-    newInput.required = true;
+    
 
    
     inputCont.appendChild(newInput);
@@ -45,7 +45,9 @@ newTaskForm.addEventListener('submit', (event) => {
    
     const groupTitle = document.getElementById('group-title').value
     const taskNames = document.querySelectorAll('input[name="task_name"]')
-    const taskValues = Array.from(taskNames).map(input=>({
+    const taskValues = Array.from(taskNames)
+    .filter(input => input.value.trim() !== "")
+    .map(input=>({
         name: input.value,
         status:'pending',
         })

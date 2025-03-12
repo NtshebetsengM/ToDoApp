@@ -96,10 +96,12 @@ h1 {
 	width: 90vw;
 	margin: 10px;
 	padding: 15px;
+	align-items: flex-start;
 }
 
 .postItNote {
-	display: block;
+	display: inline-flex;
+	flex-direction: column;
 	height: auto;
 	width: auto;
 	padding: 10px;
@@ -271,7 +273,7 @@ input::placeholder {
 
 button {
 	display: block;
-	margin: 0 auto;
+	margin: 10px;
 	padding: 15px;
 	letter-spacing: 2px;
 	transition: 0.2s all ease-in-out;
@@ -286,4 +288,9 @@ button:hover {
 	background: rgb(191, 129, 216);
 	color: white;
 	border: 1px solid rgba(0, 0, 0, 1);
+}
+
+.formBtns{
+	display: block;
+	margin: 0 auto;
 }
