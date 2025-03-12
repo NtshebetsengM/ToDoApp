@@ -32,11 +32,12 @@ h1 {
 	grid-column: 2;
 	font-size: 100px;
 	font-weight: 700;
-	color: rgb(242, 242, 242);
-	background-color: rgb(202, 127, 166);
+	color: rgb(246, 246, 246);
 	padding: 20px;
 	margin: 10px;
-	text-shadow: 2px 1px 1px black;
+	text-shadow: 4px 3px 3px rgb(0, 0, 0);
+	position: relative;
+	right: 50px;
 }
 
 /*btn styling by Paper CSS*/
