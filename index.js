@@ -88,10 +88,19 @@ newTaskForm.addEventListener('submit', (event) => {
 
 /**add new task to UI */
 
+/*randomly selecting the background color */
+const colors = ["#ffffc0", "#c0e0ff", "#c0ffc0", "#e0c0ff"];
+
+function getRandomColor(){
+    return colors[Math.floor(Math.random()* colors.length)]
+}
+
 function renderSubmission(submission) {
     const submissionContainer = document.createElement('div');
     submissionContainer.classList.add('postItNote');
     submissionContainer.id = submission.submissionId;
+
+    submissionContainer.style.backgroundColor = getRandomColor()
 
     const taskListHTML = submission.tasks
         .map((task, index) => `

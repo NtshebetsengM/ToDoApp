@@ -1,6 +1,7 @@
 :root {
 	box-sizing: border-box;
     --red: rgb(134, 1, 1);
+
 }
 
 /* <weight>: Use a value from 400 to 700
@@ -67,7 +68,6 @@ h1 {
 
 .postItNote {
 	display: block;
-	background-color: rgb(255, 255, 192);
 	height: auto;
 	width: auto;
 	padding: 10px;
@@ -80,6 +80,7 @@ h1 {
 		3px 3px 1px 1px rgb(49, 49, 52),
 		3px 3px 1px 2px rgba(0, 0, 0, 1);
 	font-size: 22px;
+	color:#2f201b;
 }
 
 .postItNote h2 {
@@ -180,7 +181,7 @@ ul {
 	margin: 0;
 	display: grid;
 	grid-template-columns: auto auto;
-	gap: 20px;
+	gap: 30px;
 }
 
 li {
@@ -191,11 +192,11 @@ li {
 li:hover {
 	
 	cursor: pointer;
-	font-weight: 700;
 }
 
 .completedTask{
 	text-decoration: line-through;
+	opacity: 0.5;
 }
 
 #new-task-modal {
