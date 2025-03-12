@@ -89,10 +89,10 @@ newTaskForm.addEventListener('submit', (event) => {
 /**add new task to UI */
 
 /*randomly selecting the background color */
-const colors = ["#ffffc0", "#c0e0ff", "#c0ffc0", "#e0c0ff"];
+const colors = ["#ffffc0", "#c0e0ff", "#c0ffc0", "#e0c0ff", "#ffc0c0"];
 
 function getRandomColor(){
-    return colors[Math.floor(Math.random()* colors.length)]
+    return colors[Math.floor(Math.random() * colors.length)]
 }
 
 function renderSubmission(submission) {

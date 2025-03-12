@@ -39,17 +39,47 @@ h1 {
 	text-shadow: 2px 1px 1px black;
 }
 
-#new-task-btn {
-	border: none;
-	padding: 10px;
-	justify-self: end;
-	margin: 0;
-	width: 50%;
-	height: 40%;
-	position: relative;
-	top: 110px;
-	right: 20px;
+/*btn styling by Paper CSS*/
+.newTaskBtn {
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
+
+.newTaskBtn:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.newTaskBtn:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+  
+  
+
 
 #post-it-board {
 	display: flex;
@@ -61,6 +91,7 @@ h1 {
 	flex-wrap: wrap;
 	gap: 20px;
 	border: 10px solid rgb(202, 127, 166);
+	border-radius: 10px;
 	width: 90vw;
 	margin: 10px;
 	padding: 15px;
@@ -75,7 +106,6 @@ h1 {
 	min-width: 150px;
 	min-height: 90px;
 	border: 1px solid rgba(0, 0, 0, 1);
-	border-radius: 10px;
 	box-shadow:
 		3px 3px 1px 1px rgb(49, 49, 52),
 		3px 3px 1px 2px rgba(0, 0, 0, 1);
@@ -255,16 +285,4 @@ button:hover {
 	background: rgb(191, 129, 216);
 	color: white;
 	border: 1px solid rgba(0, 0, 0, 1);
-}
-
-.addMoreBtn {
-	padding: 10px;
-	background-color: rgba(0, 0, 0, 0.176);
-	font-size: 10px;
-}
-
-.formBtns {
-	display: flex;
-	margin: 10px;
-	gap: 10px;
 }
