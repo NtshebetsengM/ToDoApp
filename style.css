@@ -25,19 +25,21 @@ body {
 header {
 	display: grid;
 	grid-template-columns: 1fr auto 1fr;
-	margin: 30px;
+	margin: 5vh 4vw;
 }
+
+
 h1 {
 	text-align: center;
 	grid-column: 2;
-	font-size: 100px;
+	font-size: 9vw;
 	font-weight: 700;
 	color: rgb(246, 246, 246);
 	padding: 20px;
 	margin: 10px;
 	text-shadow: 4px 3px 3px rgb(0, 0, 0);
 	position: relative;
-	right: 50px;
+	right: 5vw;
 }
 
 /*btn styling by Paper CSS*/
@@ -50,12 +52,12 @@ h1 {
   background-size: 4px 3px;
   border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
   border-style: solid;
-  border-width: 2px;
+  border-width: 0.2rem;
   box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
   color: #41403e;
   cursor: pointer;
   display: inline-block;
-  font-size: 1rem;
+  font-size: 1.5vw;
   line-height: 23px;
   outline: none;
   padding: .75rem;
@@ -293,4 +295,15 @@ button:hover {
 .formBtns{
 	display: block;
 	margin: 0 auto;
+}
+
+@media (max-width:600px){
+	header{
+		grid-template-columns: 1fr;
+		margin: 10px;
+	}
+	.newTaskBtn{
+		display: block;
+		grid-column: 2;
+	}
 }
